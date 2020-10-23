@@ -11,6 +11,8 @@ info:
 servers:
   - url: /mock-api/v1
 tags:
+  - name: players
+    description: 玩家相关接口
   - name: articles
     description: Articles data related api.
   - name: roles
@@ -20,6 +22,159 @@ tags:
   - name: users
     description: Users related api.
 paths:
+  /players: 
+    get: # method类型
+      tags: # 所属标签
+        - players
+      operationId: getPlayers # 操作
+      summary: 获取玩家列表 # 概要
+      description: 返回玩家列表 # 详细描述
+      # 描述参数信息
+      parameters:
+        - name: accountname
+          in: query # 参数位于哪里
+          description: 用于过滤的账户名称
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 指定页码
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - name: limit
+          in: query
+          description: 每页条数
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 50    
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                  data:
+                    type: object
+                    properties:
+                      total:
+                        type: integer
+                        format: int32
+                      players:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Player'
+    post: # 在get后面新增post请求
+      tags: # 所属标签
+        - players
+      operationId: creatPlayers # 操作id, 必要， 映射到实现函数
+      summary: 新增玩家信息 # 概要
+      description: 创建玩家并返回创建玩家的数据 # 详细描述
+      # 描述参数信息
+      parameters:
+        - name: player
+          in: query # 参数位于哪里
+          description: 新建玩家数据
+          schema:
+            $ref: '#/components/schemas/Player'
+      responses:
+        200:
+          description: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref:  "#/components/responses/NotFound"
+  /players/{id}: # 多了一个参数
+    get:
+      tags:
+        - players
+      summary: 获取指定玩家信息
+      operationId: getPlayer
+      security: # 安全认证
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 玩家id
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+    put: # 在get后面定义put接口
+      tags:
+        - players
+      summary: 更新玩家信息
+      description: 更新指定id的玩家信息
+      operationId: updatePlayer
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 玩家id
+          schema:
+            type: integer
+            format: int64
+        - name: player
+          in: query
+          required: true
+          description: 要更新的玩家数据
+          schema:
+            $ref: "#/components/schemas/Player"
+      responses:
+        200:
+          description: OK
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+    delete:
+      tags:
+        - players
+      summary: 删除玩家信息
+      description: 删除指定id玩家信息
+      operationId: deletePlayer
+      security:
+        - AccessTokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: 玩家id.
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
   /articles:
     get:
       tags:
@@ -746,6 +901,15 @@ components:
       required:
         - code
         - message
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        accountname:
+          type: string
+          example: 张三
     Article:
       type: object
       properties:
