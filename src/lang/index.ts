@@ -46,12 +46,15 @@ const messages = {
   }
 }
 
+// 获取语言设置的方法
 export const getLocale = () => {
+  // 默认获取cookie中数据
   const cookieLanguage = getLanguage()
   if (cookieLanguage) {
     return cookieLanguage
   }
 
+  // 浏览器语言设置
   const language = navigator.language.toLowerCase()
   const locales = Object.keys(messages)
   for (const locale of locales) {

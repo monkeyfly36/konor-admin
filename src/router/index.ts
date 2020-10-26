@@ -6,6 +6,7 @@ import Layout from '@/layout/index.vue'
 
 /* Router modules */
 import componentsRouter from './modules/components'
+import playerRouter from './modules/players'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
@@ -201,6 +202,7 @@ export const asyncRoutes: RouteConfig[] = [
   },
   /** when your routing map is too long, you can split it into small modules **/
   componentsRouter,
+  playerRouter,
   chartsRouter,
   nestedRouter,
   tableRouter,

@@ -1,5 +1,7 @@
 export default {
   route: {
+    playerMgt: 'player Manage',
+    playerList: 'player List',
     dashboard: 'Dashboard',
     documentation: 'Documentation',
     guide: 'Guide',

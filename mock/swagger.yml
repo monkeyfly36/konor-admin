@@ -75,7 +75,7 @@ paths:
     post: # 在get后面新增post请求
       tags: # 所属标签
         - players
-      operationId: creatPlayers # 操作id, 必要， 映射到实现函数
+      operationId: createPlayer # 操作id, 必要， 映射到实现函数
       summary: 新增玩家信息 # 概要
       description: 创建玩家并返回创建玩家的数据 # 详细描述
       # 描述参数信息

@@ -54,7 +54,7 @@ export interface Hero {
 // 玩家数据结构
 export interface Player {
   id: number,
-  acountname: string, // 账户名
+  accountname: string, // 账户名
   nickname: string, // 昵称
   avatar: string, // 用户头像
   level: number, // 用户等级
