@@ -40,3 +40,10 @@ export const updatePlayer = (id: number, data: any) =>
     method: 'put',
     data
   })
+
+export const deletePlayer = (id: number) =>
+  request({
+    url: `/players/${id}`,
+    method: 'delete',
+  })
+  

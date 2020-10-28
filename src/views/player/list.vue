@@ -91,7 +91,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { getPlayers } from '@/api/players'
+import { getPlayers, deletePlayer } from '@/api/players'
 import { Player } from '@/api/types'
 import Pagination from '@/components/Pagination/index.vue'
 
@@ -104,10 +104,13 @@ import Pagination from '@/components/Pagination/index.vue'
 export default class list extends Vue {
   // 玩家列表数据
   list: Player[] = []
+
   // 加载状态
   listLoading = true
+
   // 总条目数
   total = 0
+
   // 查询条件
   listQuery = {
     page: 1, // 默认第一页
@@ -140,9 +143,26 @@ export default class list extends Vue {
   handleCreate() {
     this.$router.push('/players/create')
   }
+
+  // 删除玩家
+  handleDelete(scope: any) {
+    const { $index, row } = scope
+
+    this.$confirm('确认删除玩家信息？', '警告', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning'
+    }).then(async() => {
+      await deletePlayer(row.id)
+
+      this.list.splice($index, 1)
+      this.$message({
+        type: 'success',
+        message: '删除成功！'
+      })
+    }).catch(err => {
+      console.error(err)
+    })
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
