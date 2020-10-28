@@ -114,7 +114,7 @@ export default class list extends Vue {
   // 查询条件
   listQuery = {
     page: 1, // 默认第一页
-    limit: 10, // 每页条数
+    limit: 20, // 每页条数
     accountname: undefined // 按照账户名查询
 
   }
