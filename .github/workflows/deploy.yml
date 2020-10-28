@@ -14,11 +14,11 @@ jobs:
       # 使⽤action库 actions/checkout获取源码
       uses: actions/checkout@master
     # 安装Node13
-    - name: use Node.js 13.2.0
+    - name: use Node.js 13.8.0
       # 使⽤action库 actions/setup-node安装node
       uses: actions/setup-node@v1
       with:
-        node-version: 13.2.0
+        node-version: 13.8.0
     # 安装依赖
     - name: Yarn install
       run: npm install yarn && yarn install
