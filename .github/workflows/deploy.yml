@@ -36,7 +36,7 @@ jobs:
         # 源⽬录
         SOURCE: "dist"
         # 服务器ip：换成你的服务器IP
-        REMOTE_HOST: "101.132.147.76"
+        REMOTE_HOST: "47.116.66.143"
         # ⽤户
         REMOTE_USER: "root"
         # ⽬标地址
