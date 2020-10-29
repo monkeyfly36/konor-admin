@@ -35,7 +35,7 @@ jobs:
         ARGS: "-avzr --delete"
         # 源⽬录
         SOURCE: "dist"
-        # 服务器ip：换成你的服务器IP ci
+        # 服务器ip：换成你的服务器IP ci9
         REMOTE_HOST: "47.102.209.165"
         # ⽤户
         REMOTE_USER: "root"
