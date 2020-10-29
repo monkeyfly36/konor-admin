@@ -30,7 +30,7 @@ jobs:
       uses: easingthemes/ssh-deploy@v2.1.1
       env:
         # 私钥
-        SSH_PRIVATE_KEY: ${{ secrets.MAC_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         # scp参数
         ARGS: "-avzr --delete"
         # 源⽬录
@@ -41,3 +41,4 @@ jobs:
         REMOTE_USER: "root"
         # ⽬标地址
         TARGET: "/root/konor-admin/client"
+
